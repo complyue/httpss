@@ -1,16 +1,22 @@
-server_address = ('', 8443)
 
+iface, port = '0.0.0.0', 8443
 
 import sys, os 
 import http.server, ssl
 
+try:
+	port = int(sys.argv[1])
+	iface = str(sys.argv[2])
+except:
+	pass
+
 utdir = os.path.dirname(__file__)
 
-httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
+httpd = http.server.HTTPServer((iface, port), http.server.SimpleHTTPRequestHandler)
 httpd.socket = ssl.wrap_socket(httpd.socket,
 	server_side=True,
-	certfile= f'{utdir}/localdev.pem',
+	keyfile= f'{utdir}/localdev.pem', certfile= f'{utdir}/localdev.cert',
 	ssl_version=ssl.PROTOCOL_TLSv1_2,
 )
-print('You can go to https://localhost:8443 now.')
+print(f'You can go to https://{iface}:{port} now.')
 httpd.serve_forever()
