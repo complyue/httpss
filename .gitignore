@@ -2,5 +2,7 @@
 **/__pycache__
 
 *.pem
-*.cert
+*.crt
+*.csr
+*.srl
 *.key

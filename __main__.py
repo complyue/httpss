@@ -15,7 +15,7 @@ utdir = os.path.dirname(__file__)
 httpd = http.server.HTTPServer((iface, port), http.server.SimpleHTTPRequestHandler)
 httpd.socket = ssl.wrap_socket(httpd.socket,
 	server_side=True,
-	keyfile= f'{utdir}/localdev.pem', certfile= f'{utdir}/localdev.cert',
+	keyfile= f'{utdir}/cyue.key', certfile= f'{utdir}/cyue.crt',
 	ssl_version=ssl.PROTOCOL_TLSv1_2,
 )
 print(f'You can go to https://{iface}:{port} now.')
